@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 4, 2015 1:38:43 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.tourandino.model.HotelPassenger" table="HOTEL_PASSENGERS" catalog="KEPLER_PROD">
+        <id name="hotelPassengerId" type="java.lang.Integer">
+            <column name="HOTEL_PASSENGER_ID" />
+            <generator class="identity"></generator>
+        </id>
+        <many-to-one name="passenger" class="org.tourandino.model.Passenger" fetch="join">
+            <column name="PASSENGER_ID" not-null="true" />
+        </many-to-one>
+        <many-to-one name="order" class="org.tourandino.model.Order" fetch="join">
+            <column name="ORDER_ID" not-null="true" />
+        </many-to-one>
+        <property name="hotelName" type="string">
+            <column name="HOTEL_NAME" length="100" />
+        </property>
+        <property name="hotelAddressCity" type="string">
+            <column name="HOTEL_ADDRESS_CITY" length="250" />
+        </property>
+        <property name="checkInDate" type="date">
+            <column name="CHECK_OUT_DATE" length="10" not-null="true" />
+        </property>
+        <property name="checkOutDate" type="date">
+            <column name="CHECK_IN_DATE" length="10" not-null="true" />
+        </property>
+        <property name="hotelRooms" type="string">
+            <column name="HOTEL_ROOMS" length="50" />
+        </property>
+        <property name="hotelPrice" type="float">
+            <column name="HOTEL_PRICE" precision="10" not-null="true" />
+        </property>
+        <property name="hotelCost" type="float">
+            <column name="HOTEL_COST" precision="10" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

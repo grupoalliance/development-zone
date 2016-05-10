@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 4, 2015 1:38:43 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.tourandino.model.UserSession" table="USER_SESSIONS" catalog="KEPLER_PROD">
+        <id name="userSessionId" type="java.lang.Integer">
+            <column name="USER_SESSION_ID" />
+            <generator class="identity"></generator>
+        </id>
+        <many-to-one name="user" class="org.tourandino.model.User" fetch="join">
+            <column name="USER_ID" not-null="true" />
+        </many-to-one>
+        <property name="userSessionBegintime" type="timestamp">
+            <column name="USER_SESSION_BEGINTIME" length="19" not-null="true" />
+        </property>
+        <property name="userSessionEndtime" type="timestamp">
+            <column name="USER_SESSION_ENDTIME" length="19" />
+        </property>
+        <property name="userSessionIsClosed" type="java.lang.Boolean">
+            <column name="USER_SESSION_IS_CLOSED" />
+        </property>
+    </class>
+</hibernate-mapping>

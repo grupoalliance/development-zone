@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 4, 2015 1:38:43 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.tourandino.model.User" table="USERS" catalog="KEPLER_PROD">
+        <id name="userId" type="java.lang.Integer">
+            <column name="USER_ID" />
+            <generator class="identity"></generator>
+        </id>
+        <many-to-one name="role" class="org.tourandino.model.Role" fetch="join">
+            <column name="ROLE_ID" not-null="true" />
+        </many-to-one>
+        <property name="userUsername" type="string">
+            <column name="USER_USERNAME" length="8" not-null="true" />
+        </property>
+        <property name="userPassword" type="string">
+            <column name="USER_PASSWORD" length="20" not-null="true" />
+        </property>
+        <property name="userFullname" type="string">
+            <column name="USER_FULLNAME" length="100" not-null="true" />
+        </property>
+        <property name="userBirthdate" type="date">
+            <column name="USER_BIRTHDATE" length="10" not-null="true" />
+        </property>
+        <property name="userAddress" type="string">
+            <column name="USER_ADDRESS" length="100" />
+        </property>
+        <property name="userCity" type="string">
+            <column name="USER_CITY" length="50" />
+        </property>
+        <property name="userPhone" type="string">
+            <column name="USER_PHONE" length="20" />
+        </property>
+        <property name="userMobile" type="string">
+            <column name="USER_MOBILE" length="20" />
+        </property>
+        <property name="userEmail" type="string">
+            <column name="USER_EMAIL" length="100" />
+        </property>
+        <set name="orders" table="ORDERS" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="USER_ID" not-null="true" />
+            </key>
+            <one-to-many class="org.tourandino.model.Order" />
+        </set>
+        <set name="userSessions" table="USER_SESSIONS" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="USER_ID" not-null="true" />
+            </key>
+            <one-to-many class="org.tourandino.model.UserSession" />
+        </set>
+    </class>
+</hibernate-mapping>

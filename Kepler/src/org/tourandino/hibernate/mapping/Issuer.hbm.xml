@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 4, 2015 1:38:43 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.tourandino.model.Issuer" table="ISSUERS" catalog="KEPLER_PROD">
+        <id name="issuerId" type="java.lang.Integer">
+            <column name="ISSUER_ID" />
+            <generator class="identity"></generator>
+        </id>
+        <many-to-one name="taxCondition" class="org.tourandino.model.TaxCondition" fetch="join">
+            <column name="TAX_CONDITION_ID" not-null="true" />
+        </many-to-one>
+        <property name="issuerName" type="string">
+            <column name="ISSUER_NAME" length="50" not-null="true" />
+        </property>
+        <property name="issuerCuit" type="string">
+            <column name="ISSUER_CUIT" length="20" />
+        </property>
+        <property name="issuerCreditLimit" type="float">
+            <column name="ISSUER_CREDIT_LIMIT" precision="10" not-null="true" />
+        </property>
+        <property name="issuerAddress" type="string">
+            <column name="ISSUER_ADDRESS" length="100" />
+        </property>
+        <property name="issuerCity" type="string">
+            <column name="ISSUER_CITY" length="50" />
+        </property>
+        <property name="issuerPhone1" type="string">
+            <column name="ISSUER_PHONE1" length="20" />
+        </property>
+        <property name="issuerPhone2" type="string">
+            <column name="ISSUER_PHONE2" length="20" />
+        </property>
+        <property name="issuerMobile" type="string">
+            <column name="ISSUER_MOBILE" length="20" />
+        </property>
+        <property name="issuerEmail" type="string">
+            <column name="ISSUER_EMAIL" length="100" />
+        </property>
+        <property name="issuerWebsite" type="string">
+            <column name="ISSUER_WEBSITE" length="100" />
+        </property>
+        <set name="issuerInvoices" table="ISSUER_INVOICES" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ISSUER_ID" not-null="true" />
+            </key>
+            <one-to-many class="org.tourandino.model.IssuerInvoice" />
+        </set>
+        <set name="orders" table="ORDERS" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ISSUER_ID" not-null="true" />
+            </key>
+            <one-to-many class="org.tourandino.model.Order" />
+        </set>
+    </class>
+</hibernate-mapping>

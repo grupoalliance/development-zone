@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 4, 2015 1:38:43 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.tourandino.model.Order" table="ORDERS" catalog="KEPLER_PROD">
+        <id name="orderId" type="java.lang.Integer">
+            <column name="ORDER_ID" />
+            <generator class="identity"></generator>
+        </id>
+        <many-to-one name="user" class="org.tourandino.model.User" fetch="join">
+            <column name="USER_ID" not-null="true" />
+        </many-to-one>
+        <many-to-one name="issuer" class="org.tourandino.model.Issuer" fetch="join">
+            <column name="ISSUER_ID" not-null="true" />
+        </many-to-one>
+        <many-to-one name="customer" class="org.tourandino.model.Customer" fetch="join">
+            <column name="CUSTOMER_ID" not-null="true" />
+        </many-to-one>
+        <property name="orderDate" type="date">
+            <column name="ORDER_DATE" length="10" not-null="true" />
+        </property>
+        <property name="orderTime" type="timestamp">
+            <column name="ORDER_TIME" length="19" not-null="true" />
+        </property>
+        <property name="orderSubtotal" type="float">
+            <column name="ORDER_SUBTOTAL" precision="10" not-null="true" />
+        </property>
+        <property name="orderRate" type="float">
+            <column name="ORDER_RATE" precision="10" not-null="true" />
+        </property>
+        <property name="orderTax" type="float">
+            <column name="ORDER_TAX" precision="10" not-null="true" />
+        </property>
+        <property name="orderDiscount" type="float">
+            <column name="ORDER_DISCOUNT" precision="10" not-null="true" />
+        </property>
+        <property name="orderTotal" type="float">
+            <column name="ORDER_TOTAL" precision="10" not-null="true" />
+        </property>
+        <property name="orderCost" type="float">
+            <column name="ORDER_COST" precision="10" not-null="true" />
+        </property>
+        <property name="orderProfit" type="float">
+            <column name="ORDER_PROFIT" precision="10" not-null="true" />
+        </property>
+        <property name="orderDescr" type="string">
+            <column name="ORDER_DESCR" length="50" />
+        </property>
+        <set name="issuerInvoices" table="ISSUER_INVOICES" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ORDER_ID" not-null="true" />
+            </key>
+            <one-to-many class="org.tourandino.model.IssuerInvoice" />
+        </set>
+        <set name="flightPassengers" table="FLIGHT_PASSENGERS" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ISSUER_ID" not-null="true" />
+            </key>
+            <one-to-many class="org.tourandino.model.FlightPassenger" />
+        </set>
+        <set name="insurancePassengers" table="INSURANCE_PASSENGERS" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ISSUER_ID" not-null="true" />
+            </key>
+            <one-to-many class="org.tourandino.model.InsurancePassenger" />
+        </set>
+          <set name="busPassengers" table="BUS_PASSENGERS" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ISSUER_ID" not-null="true" />
+            </key>
+            <one-to-many class="org.tourandino.model.BusPassenger" />
+        </set>
+        <set name="hotelPassengers" table="HOTEL_PASSENGERS" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ISSUER_ID" not-null="true" />
+            </key>
+            <one-to-many class="org.tourandino.model.HotelPassenger" />
+        </set>
+        <set name="packagePassengers" table="PACKAGE_PASSENGERS" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ISSUER_ID" not-null="true" />
+            </key>
+            <one-to-many class="org.tourandino.model.PackagePassenger" />
+        </set>
+        <set name="payments" table="PAYMENTS" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ORDER_ID" not-null="true" />
+            </key>
+            <one-to-many class="org.tourandino.model.Payment" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 4, 2015 1:38:43 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.tourandino.model.InsurancePassenger" table="INSURANCE_PASSENGERS" catalog="KEPLER_PROD">
+        <id name="insurancePassengerId" type="java.lang.Integer">
+            <column name="INSURANCE_PASSENGER_ID" />
+            <generator class="identity"></generator>
+        </id>
+        <many-to-one name="passenger" class="org.tourandino.model.Passenger" fetch="join">
+            <column name="PASSENGER_ID" not-null="true" />
+        </many-to-one>
+        <many-to-one name="order" class="org.tourandino.model.Order" fetch="join">
+            <column name="ORDER_ID" not-null="true" />
+        </many-to-one>
+        <property name="insuranceName" type="string">
+            <column name="INSURANCE_NAME" length="100" />
+        </property>
+        <property name="insuranceType" type="string">
+            <column name="INSURANCE_TYPE" length="100" />
+        </property>
+        <property name="insuranceNote" type="string">
+            <column name="INSURANCE_NOTE" length="250" />
+        </property>
+        <property name="insurancePrice" type="float">
+            <column name="INSURANCE_PRICE" precision="10" not-null="true" />
+        </property>
+        <property name="insuranceCost" type="float">
+            <column name="INSURANCE_COST" precision="10" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

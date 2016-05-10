@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 4, 2015 1:38:43 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.tourandino.model.CustAccPayment" table="CUST_ACC_PAYMENTS" catalog="KEPLER_PROD">
+        <id name="custAccPaymentId" type="java.lang.Integer">
+            <column name="CUST_ACC_PAYMENTS_ID" />
+            <generator class="identity"></generator>
+        </id>
+        <many-to-one name="customerAccount" class="org.tourandino.model.CustomerAccount" fetch="join">
+            <column name="CUSTOMER_ACCOUNT_ID" not-null="true" />
+        </many-to-one>
+        <property name="custAccPaymentDatetime" type="timestamp">
+            <column name="CUST_ACC_PAYMENT_DATETIME" length="19" not-null="true" />
+        </property>
+        <property name="custAccPaymentTax" type="float">
+            <column name="CUST_ACC_PAYMENT_TAX" precision="10" not-null="true" />
+        </property>
+        <property name="custAccPaymentRate" type="float">
+            <column name="CUST_ACC_PAYMENT_RATE" precision="10" not-null="true" />
+        </property>
+        <property name="custAccPaymentTotal" type="float">
+            <column name="CUST_ACC_PAYMENT_TOTAL" precision="10" not-null="true" />
+        </property>
+        <property name="custAccPaymentNote" type="string">
+            <column name="CUST_ACC_PAYMENT_NOTE" length="250" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 4, 2015 1:38:43 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.tourandino.model.ErrorLog" table="ERROR_LOGS" catalog="KEPLER_PROD">
+        <id name="errorLogId" type="java.lang.Integer">
+            <column name="ERROR_LOG_ID" />
+            <generator class="identity"></generator>
+        </id>
+        <property name="datetime" type="timestamp">
+            <column name="ERROR_LOG_DATETIME" length="19" not-null="true" />
+        </property>
+        <property name="message" type="string">
+            <column name="ERROR_LOG_MESSAGE" length="250" not-null="true" />
+        </property>
+        <property name="location" type="string">
+            <column name="ERROR_LOG_LOCATION" length="250" not-null="true" />
+        </property>
+        <property name="detail" type="string">
+            <column name="ERROR_LOG_DETAIL" length="250" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 4, 2015 1:38:43 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.tourandino.model.TaxCondition" table="TAX_CONDITIONS" catalog="KEPLER_PROD">
+        <id name="taxConditionId" type="java.lang.Integer">
+            <column name="TAX_CONDITION_ID" />
+            <generator class="identity"></generator>
+        </id>
+        <property name="taxConditionName" type="string">
+            <column name="TAX_CONDITION_NAME" length="20" not-null="true" />
+        </property>
+        <property name="taxConditionDescr" type="string">
+            <column name="TAX_CONDITION_DESCR" length="100" />
+        </property>
+        <property name="taxConditionCode" type="string">
+            <column name="TAX_CONDITION_CODE" length="8" not-null="true" />
+        </property>
+        <set name="issuers" table="ISSUERS" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="TAX_CONDITION_ID" not-null="true" />
+            </key>
+            <one-to-many class="org.tourandino.model.Issuer" />
+        </set>
+        <set name="customers" table="CUSTOMERS" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="TAX_CONDITION_ID" not-null="true" />
+            </key>
+            <one-to-many class="org.tourandino.model.Customer" />
+        </set>
+    </class>
+</hibernate-mapping>

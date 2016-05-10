@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 4, 2015 1:38:43 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.tourandino.model.CustomerAccount" table="CUSTOMER_ACCOUNTS" catalog="KEPLER_PROD">
+        <id name="customerAccountId" type="java.lang.Integer">
+            <column name="CUSTOMER_ACCOUNT_ID" />
+            <generator class="identity"></generator>
+        </id>
+        <many-to-one name="customer" class="org.tourandino.model.Customer" fetch="join">
+            <column name="CUSTOMER_ID" not-null="true" />
+        </many-to-one>
+        <property name="customerAccountName" type="string">
+            <column name="CUSTOMER_ACCOUNT_NAME" length="50" />
+        </property>
+        <property name="customerAccountBalance" type="float">
+            <column name="CUSTOMER_ACCOUNT_BALANCE" precision="10" not-null="true" />
+        </property>
+        <property name="customerAccountLimit" type="float">
+            <column name="CUSTOMER_ACCOUNT_LIMIT" precision="10" not-null="true" />
+        </property>
+        <property name="customerAccountCreationDatetime" type="timestamp">
+            <column name="CUSTOMER_ACCOUNT_CREATION_DATETIME" length="19" not-null="true" />
+        </property>
+        <property name="customerAccountLastMovement" type="timestamp">
+            <column name="CUSTOMER_ACCOUNT_LAST_MOVEMENT" length="19" />
+        </property>
+        <set name="custAccPayments" table="CUST_ACC_PAYMENTS" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CUSTOMER_ACCOUNT_ID" not-null="true" />
+            </key>
+            <one-to-many class="org.tourandino.model.CustAccPayment" />
+        </set>
+    </class>
+</hibernate-mapping>

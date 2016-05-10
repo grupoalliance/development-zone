@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 4, 2015 1:38:43 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.tourandino.model.Passenger" table="PASSENGERS" catalog="KEPLER_PROD">
+        <id name="passengerId" type="java.lang.Integer">
+            <column name="PASSENGER_ID" />
+            <generator class="identity"></generator>
+        </id>
+        <property name="passengerFullname" type="string">
+            <column name="PASSENGER_FULLNAME" length="100" not-null="true" />
+        </property>
+        <property name="passengerBirthdate" type="date">
+            <column name="PASSENGER_BIRTHDATE" length="10" not-null="true" />
+        </property>
+        <property name="passengerAddress" type="string">
+            <column name="PASSENGER_ADDRESS" length="100" />
+        </property>
+        <property name="passengerCity" type="string">
+            <column name="PASSENGER_CITY" length="50" />
+        </property>
+        <property name="passengerPhone1" type="string">
+            <column name="PASSENGER_PHONE1" length="20" />
+        </property>
+        <property name="passengerPhone2" type="string">
+            <column name="PASSENGER_PHONE2" length="20" />
+        </property>
+        <property name="passengerMobile1" type="string">
+            <column name="PASSENGER_MOBILE1" length="20" />
+        </property>
+        <property name="passengerMobile2" type="string">
+            <column name="PASSENGER_MOBILE2" length="20" />
+        </property>
+        <property name="passengerEmail" type="string">
+            <column name="PASSENGER_EMAIL" length="100" />
+        </property>
+        <set name="insurancePassengers" table="INSURANCE_PASSENGERS" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PASSENGER_ID" not-null="true" />
+            </key>
+            <one-to-many class="org.tourandino.model.InsurancePassenger" />
+        </set>
+        <set name="flightPassengers" table="FLIGHT_PASSENGERS" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PASSENGER_ID" not-null="true" />
+            </key>
+            <one-to-many class="org.tourandino.model.FlightPassenger" />
+        </set>
+        <set name="hotelPassengers" table="HOTEL_PASSENGERS" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PASSENGER_ID" not-null="true" />
+            </key>
+            <one-to-many class="org.tourandino.model.HotelPassenger" />
+        </set>
+        <set name="packagePassengers" table="PACKAGE_PASSENGERS" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PASSENGER_ID" not-null="true" />
+            </key>
+            <one-to-many class="org.tourandino.model.PackagePassenger" />
+        </set>
+        <set name="busPassengers" table="BUS_PASSENGERS" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PASSENGER_ID" not-null="true" />
+            </key>
+            <one-to-many class="org.tourandino.model.BusPassenger" />
+        </set>
+    </class>
+</hibernate-mapping>

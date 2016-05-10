@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2015-11-19T11:39:50 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Aux" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4eedbb89-b4f6-4469-9ab6-f642a1688cf7">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MySQL"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#EEEFF0"/>
+		</conditionalStyle>
+	</style>
+	<style name="Table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+			<topPen lineWidth="1.0" lineColor="#000000"/>
+			<leftPen lineWidth="1.0" lineColor="#000000"/>
+			<bottomPen lineWidth="1.0" lineColor="#000000"/>
+			<rightPen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#CACED0">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#D8D8D8"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="tableDataset" uuid="f13e6d36-5148-4ecc-bbe3-3035def80980">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
+	<parameter name="ORDER_ID" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT `KEPLER_TEST`.`CUSTOMERS`.`CUSTOMER_FULLNAME`,
+	`KEPLER_TEST`.`CUSTOMERS`.`CUSTOMER_CUIT`,
+	`KEPLER_TEST`.`CUSTOMERS`.`CUSTOMER_ADDRESS`,
+	`KEPLER_TEST`.`CUSTOMERS`.`CUSTOMER_CITY`,
+	`KEPLER_TEST`.`FLIGHT_PASSENGERS`.`FLIGHT_PRICE`,
+	`KEPLER_TEST`.`FLIGHT_PASSENGERS`.`ITINERARY`,
+	`KEPLER_TEST`.`PASSENGERS`.`PASSENGER_FULLNAME`,
+	`KEPLER_TEST`.`ORDERS`.`ORDER_DATE`,
+	`KEPLER_TEST`.`ORDERS`.`ORDER_TIME`,
+	`KEPLER_TEST`.`ORDERS`.`ORDER_RATE`,
+	`KEPLER_TEST`.`ORDERS`.`ORDER_TAX`,
+	`KEPLER_TEST`.`ORDERS`.`ORDER_DISCOUNT`,
+	`KEPLER_TEST`.`ORDERS`.`ORDER_TOTAL`,
+	`KEPLER_TEST`.`ORDERS`.`ORDER_DESCR`,
+	`KEPLER_TEST`.`ORDERS`.`ORDER_SUBTOTAL`,
+	`KEPLER_TEST`.`USERS`.`USER_USERNAME`,
+	`KEPLER_TEST`.`TAX_CONDITIONS`.`TAX_CONDITION_NAME`,
+	`KEPLER_TEST`.`PAYMENT_METHODS`.`PAYMENT_METHOD_NAME`,
+	`KEPLER_TEST`.`PAYMENTS`.`PAYMENT_DATETIME`,
+	`KEPLER_TEST`.`PAYMENTS`.`PAYMENT_TAX`,
+	`KEPLER_TEST`.`PAYMENTS`.`PAYMENT_RATE`,
+	`KEPLER_TEST`.`PAYMENTS`.`PAYMENT_TOTAL`,
+	`KEPLER_TEST`.`PAYMENTS`.`PAYMENT_NOTE`
+FROM `KEPLER_TEST`.`FLIGHT_PASSENGERS`
+	INNER JOIN `KEPLER_TEST`.`ORDERS` ON 
+	 `KEPLER_TEST`.`FLIGHT_PASSENGERS`.`ORDER_ID` = `KEPLER_TEST`.`ORDERS`.`ORDER_ID` 
+	INNER JOIN `KEPLER_TEST`.`CUSTOMERS` ON 
+	 `KEPLER_TEST`.`ORDERS`.`CUSTOMER_ID` = `KEPLER_TEST`.`CUSTOMERS`.`CUSTOMER_ID` 
+	INNER JOIN `KEPLER_TEST`.`PASSENGERS` ON 
+	 `KEPLER_TEST`.`FLIGHT_PASSENGERS`.`PASSENGER_ID` = `KEPLER_TEST`.`PASSENGERS`.`PASSENGER_ID` 
+	INNER JOIN `KEPLER_TEST`.`TAX_CONDITIONS` ON 
+	 `KEPLER_TEST`.`CUSTOMERS`.`TAX_CONDITION_ID` = `KEPLER_TEST`.`TAX_CONDITIONS`.`TAX_CONDITION_ID` 
+	INNER JOIN `KEPLER_TEST`.`USERS` ON 
+	 `KEPLER_TEST`.`ORDERS`.`USER_ID` = `KEPLER_TEST`.`USERS`.`USER_ID` 
+	INNER JOIN `KEPLER_TEST`.`PAYMENTS` ON 
+	 `KEPLER_TEST`.`PAYMENTS`.`ORDER_ID` = `KEPLER_TEST`.`ORDERS`.`ORDER_ID` 
+	INNER JOIN `KEPLER_TEST`.`PAYMENT_METHODS` ON 
+	 `KEPLER_TEST`.`PAYMENTS`.`PAYMENT_METHOD_ID` = `KEPLER_TEST`.`PAYMENT_METHODS`.`PAYMENT_METHOD_ID` 
+WHERE 
+	 `KEPLER_TEST`.`ORDERS`.`ORDER_ID` = $P{ORDER_ID} 
+GROUP BY   `KEPLER_TEST`.`FLIGHT_PASSENGERS`.`FLIGHT_PASSENGER_ID`]]>
+	</queryString>
+	<field name="CUSTOMER_FULLNAME" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CUSTOMER_CUIT" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CUSTOMER_ADDRESS" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CUSTOMER_CITY" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="FLIGHT_PRICE" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ITINERARY" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="PASSENGER_FULLNAME" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ORDER_DATE" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ORDER_TIME" class="java.sql.Time">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ORDER_RATE" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ORDER_TAX" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ORDER_DISCOUNT" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ORDER_TOTAL" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ORDER_DESCR" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ORDER_SUBTOTAL" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="USER_USERNAME" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TAX_CONDITION_NAME" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="PAYMENT_METHOD_NAME" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="PAYMENT_DATETIME" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="PAYMENT_TAX" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="PAYMENT_RATE" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="PAYMENT_TOTAL" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="PAYMENT_NOTE" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<title>
+		<band height="205" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="115" width="120" height="15" uuid="33274f5d-5b7e-4be2-a2ff-65d452a618ed"/>
+				<text><![CDATA[CLIENTE:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="90" width="556" height="1" uuid="806ce5df-1219-4876-ae0c-ca7405b1f246">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="130" width="120" height="15" uuid="1d3045ed-03d6-4253-a959-aeeb491b73ca"/>
+				<text><![CDATA[DOMICILIO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="145" width="120" height="15" uuid="235bf8b6-1e1e-49c7-b59f-7a46c30b8209"/>
+				<text><![CDATA[CATEGORIA IVA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="130" width="90" height="15" uuid="edbd74ac-0cbd-44c9-8a8e-ccf745191172"/>
+				<text><![CDATA[CIUDAD:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="145" width="90" height="15" uuid="2d2f365d-7b12-4a8f-990d-ff528a2660bc"/>
+				<text><![CDATA[CUIT:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="45" width="205" height="15" uuid="fbc9883b-ca9d-41bf-a108-31da84eb503e"/>
+				<text><![CDATA[0388 422-2309]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="15" width="205" height="15" uuid="d12b38b2-bf01-48ad-b417-f66a46e2bd94"/>
+				<text><![CDATA[SENADOR PEREZ 355]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="30" width="205" height="15" uuid="743952cf-0839-48f3-97af-f9a6895ea029"/>
+				<text><![CDATA[CP 4600 - JUJUY - ARGENTINA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="205" height="15" uuid="ba1c801f-1094-439e-aeb2-e5e0aebce02a"/>
+				<text><![CDATA[TOUR ANDINO SRL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="60" width="205" height="15" uuid="32816c59-6857-40e8-91c5-7ef0dca87c33"/>
+				<text><![CDATA[IVA RESPONSABLE INSCRIPTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="75" width="205" height="15" uuid="66b123c0-3eee-4477-9fcf-3ad8988ed521"/>
+				<text><![CDATA[CUIT: 30-70918969-3]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="410" y="20" width="70" height="20" uuid="ed03ef5d-6415-49f9-b29c-5b61d0119b5e"/>
+				<box rightPadding="4"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[FECHA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="410" y="60" width="70" height="20" uuid="21496049-66f4-4960-87e0-2bafabb21f69"/>
+				<box rightPadding="4"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[ORDEN #]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="410" y="40" width="70" height="20" uuid="105ec876-18c3-44b0-88d1-60a1ee359396"/>
+				<box rightPadding="4"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[HORA:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="180" width="556" height="1" uuid="d522efe3-7edc-403b-880f-d34035c5369e">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
+			<textField>
+				<reportElement x="122" y="115" width="178" height="15" uuid="6efa7672-6a86-4082-a6c3-747897a4470b"/>
+				<textFieldExpression><![CDATA[$F{CUSTOMER_FULLNAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="145" width="155" height="15" uuid="78689546-4b93-42e7-9c5a-a24a379c2d3f"/>
+				<textFieldExpression><![CDATA[$F{CUSTOMER_CUIT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="120" y="130" width="180" height="15" uuid="d6377afb-d571-4f10-a308-262dc6d2883d"/>
+				<textFieldExpression><![CDATA[$F{CUSTOMER_ADDRESS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="130" width="156" height="15" uuid="841eea47-55a2-405f-829f-69aeae211eb3"/>
+				<textFieldExpression><![CDATA[$F{CUSTOMER_CITY}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="120" y="146" width="180" height="14" uuid="84eced0b-b36c-49ff-9ef9-f167fcc0f026"/>
+				<textFieldExpression><![CDATA[$F{TAX_CONDITION_NAME}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MM-yyyy">
+				<reportElement x="480" y="20" width="76" height="20" uuid="586ec856-899f-45ec-a6bd-58c6dbbed169"/>
+				<textFieldExpression><![CDATA[$F{ORDER_DATE}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH:mm">
+				<reportElement x="480" y="40" width="75" height="20" uuid="eda73fb1-6061-4539-b42f-ab14194d853a"/>
+				<textFieldExpression><![CDATA[$F{ORDER_TIME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="480" y="60" width="75" height="20" uuid="b8937e7c-afba-434b-9561-c1b876f86c2c"/>
+				<textFieldExpression><![CDATA[$P{ORDER_ID}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="220" y="185" width="100" height="20" uuid="8fac87c5-67d2-40bb-9e05-99fced885efd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[DETALLE]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="23">
+			<staticText>
+				<reportElement x="480" y="0" width="75" height="20" uuid="572f5f3f-d9a5-4342-955c-655d1ca3e0ff"/>
+				<text><![CDATA[PRECIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="1" width="205" height="19" uuid="97c09e9a-0715-4d93-b93f-55f6ccab6f9a"/>
+				<text><![CDATA[PASAJERO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="205" y="1" width="275" height="20" uuid="50f0e9c5-c676-4436-b07c-a395efcc995d"/>
+				<text><![CDATA[TRAMO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22">
+			<textField>
+				<reportElement x="480" y="0" width="76" height="20" uuid="dcc4e763-0572-48e1-a277-7919c2f9008d"/>
+				<textFieldExpression><![CDATA[$F{FLIGHT_PRICE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="205" y="0" width="275" height="20" uuid="d6ebe1f3-d33e-406e-9355-6b67be860612"/>
+				<textFieldExpression><![CDATA[$F{ITINERARY}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="205" height="20" uuid="692dfee6-fd34-4772-ab21-9bf0920c80ed"/>
+				<textFieldExpression><![CDATA[$F{PASSENGER_FULLNAME}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="182">
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="0" y="130" width="556" height="30" backcolor="#E6E8E9" uuid="36aa233d-4305-48e6-974a-1bbf89bb3c8f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="9" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[¡GRACIAS POR SU COMPRA!]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="110" y="100" width="200" height="20" uuid="2b37b7e1-200c-4623-b0ff-bad67d0b3cf8"/>
+				<textFieldExpression><![CDATA[$F{USER_USERNAME}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="100" width="110" height="20" uuid="f223a040-d411-4067-b56b-5781ff21b6b1"/>
+				<text><![CDATA[USUARIO:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="480" y="0" width="75" height="20" uuid="6872d82c-d54f-4621-badc-b5c4d546fbb6"/>
+				<textFieldExpression><![CDATA[$F{ORDER_SUBTOTAL}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="380" y="0" width="100" height="20" uuid="3ae487e5-9af8-43d7-8413-61a0ea3d9b49"/>
+				<text><![CDATA[SUBTOTAL:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="480" y="44" width="75" height="16" uuid="1b93709d-3c4f-4cfc-b5dd-8aeda7a87a5f"/>
+				<textFieldExpression><![CDATA[$F{ORDER_RATE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="480" y="20" width="75" height="20" uuid="32d30bf1-2c81-429f-af74-41c3b68792eb"/>
+				<textFieldExpression><![CDATA[$F{ORDER_TAX}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="480" y="60" width="75" height="20" uuid="ec8dabaf-4a81-4050-8944-ab561f6e6cc6"/>
+				<textFieldExpression><![CDATA[$F{ORDER_DISCOUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="480" y="80" width="75" height="20" uuid="c95c14d1-d102-4d4d-ba8c-1b75aecb62bc"/>
+				<textFieldExpression><![CDATA[$F{ORDER_TOTAL}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="380" y="80" width="100" height="20" uuid="6873e334-b192-4d5a-9665-dff4562c94f4"/>
+				<text><![CDATA[TOTAL:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="60" width="100" height="20" uuid="bfd91eff-a83c-407c-b252-3bded22cf206"/>
+				<text><![CDATA[DESCUENTOS:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="20" width="100" height="20" uuid="11fccc9a-6ede-4a72-af81-b6161ef43a65"/>
+				<text><![CDATA[IVA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="40" width="100" height="20" uuid="21e8f9f0-d141-4f0d-9f1c-60d7d24362b3"/>
+				<text><![CDATA[OTRAS TASAS:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="110" y="80" width="200" height="20" uuid="f9860109-e80d-49e5-84d8-a18b90ddb99e"/>
+				<textFieldExpression><![CDATA[$F{ORDER_DESCR}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="80" width="110" height="20" uuid="8ea483ca-a80c-4c57-8501-0948cd03e6a2"/>
+				<text><![CDATA[TIPO DE VENTA:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="535" y="162" width="20" height="20" uuid="cdb22bb4-50d4-48f8-b27b-3f8f62a8e067"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+</jasperReport>

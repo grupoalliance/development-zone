@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 4, 2015 1:38:43 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.tourandino.model.Customer" table="CUSTOMERS" catalog="KEPLER_PROD">
+        <id name="customerId" type="java.lang.Integer">
+            <column name="CUSTOMER_ID" />
+            <generator class="identity"></generator>
+        </id>
+        <many-to-one name="taxCondition" class="org.tourandino.model.TaxCondition" fetch="join">
+            <column name="TAX_CONDITION_ID" not-null="true" />
+        </many-to-one>
+        <property name="customerFullname" type="string">
+            <column name="CUSTOMER_FULLNAME" length="100" not-null="true" />
+        </property>
+        <property name="customerCuit" type="string">
+            <column name="CUSTOMER_CUIT" length="20" />
+        </property>
+        <property name="customerCreditLimit" type="float">
+            <column name="CUSTOMER_CREDIT_LIMIT" precision="10" not-null="true" />
+        </property>
+        <property name="customerBirthdate" type="date">
+            <column name="CUSTOMER_BIRTHDATE" length="10" not-null="true" />
+        </property>
+        <property name="customerAddress" type="string">
+            <column name="CUSTOMER_ADDRESS" length="100" />
+        </property>
+        <property name="customerCity" type="string">
+            <column name="CUSTOMER_CITY" length="50" />
+        </property>
+        <property name="customerPhone" type="string">
+            <column name="CUSTOMER_PHONE" length="20" />
+        </property>
+        <property name="customerMobile" type="string">
+            <column name="CUSTOMER_MOBILE" length="20" />
+        </property>
+        <property name="customerEmail" type="string">
+            <column name="CUSTOMER_EMAIL" length="100" />
+        </property>
+        <set name="orders" table="ORDERS" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CUSTOMER_ID" not-null="true" />
+            </key>
+            <one-to-many class="org.tourandino.model.Order" />
+        </set>
+        <set name="customerAccounts" table="CUSTOMER_ACCOUNTS" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CUSTOMER_ID" not-null="true" />
+            </key>
+            <one-to-many class="org.tourandino.model.CustomerAccount" />
+        </set>
+    </class>
+</hibernate-mapping>

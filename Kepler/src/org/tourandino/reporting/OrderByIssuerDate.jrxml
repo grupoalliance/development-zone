@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2015-11-19T22:24:50 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OrderByIssuerDate" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4eedbb89-b4f6-4469-9ab6-f642a1688cf7">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#EEEFF0"/>
+		</conditionalStyle>
+	</style>
+	<style name="Table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+			<topPen lineWidth="1.0" lineColor="#000000"/>
+			<leftPen lineWidth="1.0" lineColor="#000000"/>
+			<bottomPen lineWidth="1.0" lineColor="#000000"/>
+			<rightPen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#CACED0">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#D8D8D8"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="tableDataset" uuid="f13e6d36-5148-4ecc-bbe3-3035def80980">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
+	<parameter name="ISSUER" class="java.lang.String"/>
+	<parameter name="DATE_MIN" class="java.sql.Date"/>
+	<parameter name="DATE_MAX" class="java.sql.Date">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT kepler_test.orders.`ORDER_DATE`,
+	kepler_test.orders.`ORDER_TIME`,
+	kepler_test.orders.`ORDER_TOTAL`,
+	kepler_test.orders.`ORDER_COST`,
+	kepler_test.orders.`ORDER_PROFIT`,
+	kepler_test.orders.`ORDER_DESCR`,
+	kepler_test.orders.`ORDER_SUBTOTAL`,
+	kepler_test.issuers.`ISSUER_NAME`,
+	kepler_test.users.`USER_USERNAME`,
+	kepler_test.customers.`CUSTOMER_FULLNAME`
+FROM kepler_test.orders
+	INNER JOIN kepler_test.issuers ON 
+	 kepler_test.orders.`ISSUER_ID` = kepler_test.issuers.`ISSUER_ID` 
+	INNER JOIN kepler_test.customers ON 
+	 kepler_test.orders.`CUSTOMER_ID` = kepler_test.customers.`CUSTOMER_ID` 
+	INNER JOIN kepler_test.users ON 
+	 kepler_test.orders.`USER_ID` = kepler_test.users.`USER_ID` 
+WHERE 
+	 kepler_test.issuers.`ISSUER_NAME` LIKE $P{ISSUER} 
+	 AND kepler_test.orders.`ORDER_DATE` BETWEEN $P{DATE_MIN} AND $P{DATE_MAX}]]>
+	</queryString>
+	<field name="ORDER_DATE" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ORDER_TIME" class="java.sql.Time">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ORDER_TOTAL" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ORDER_COST" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ORDER_PROFIT" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ORDER_DESCR" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ORDER_SUBTOTAL" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ISSUER_NAME" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="USER_USERNAME" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CUSTOMER_FULLNAME" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<title>
+		<band height="205" splitType="Stretch">
+			<line>
+				<reportElement x="2" y="110" width="556" height="1" uuid="806ce5df-1219-4876-ae0c-ca7405b1f246">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
+			<staticText>
+				<reportElement x="420" y="80" width="50" height="20" uuid="0f86baff-6386-4f3f-b3fe-2388707babe8"/>
+				<box rightPadding="4"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Date:]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="470" y="80" width="84" height="20" uuid="bb10dbe1-0a4f-4722-9953-c163b63cf979"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="45" width="180" height="15" uuid="8ad27d6b-4608-468d-95f6-0e14c967028d"/>
+				<text><![CDATA[0388 422-2309]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="15" width="180" height="15" uuid="7ed79b26-5c51-497c-94aa-666946157528"/>
+				<text><![CDATA[SENADOR PEREZ 355]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="30" width="180" height="15" uuid="deed9f19-95e2-4db6-a710-740cd8ffe6ef"/>
+				<text><![CDATA[CP 4600 - JUJUY - ARGENTINA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="180" height="15" uuid="7cd69ea6-0cf5-4780-8ccf-84e1986d1429"/>
+				<text><![CDATA[TOUR ANDINO SRL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="60" width="180" height="15" uuid="39ffb2dc-9c64-41cd-8969-babc0e5656a3"/>
+				<text><![CDATA[IVA RESPONSABLE INSCRIPTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="270" y="0" width="284" height="45" uuid="739a7d3a-3223-4891-9e4c-1b1a310c0fcb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="22" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[RESUMEN DE VENTAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="230" y="120" width="100" height="20" uuid="f085d1c4-d0ac-41d8-8324-8ae054e1828f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[FILTROS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="75" width="180" height="15" uuid="48707168-8b93-47ba-840c-7f619f577b52"/>
+				<text><![CDATA[CUIT: 30-70918969-3]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="23">
+			<staticText>
+				<reportElement x="0" y="3" width="50" height="15" uuid="86da1c11-b18b-490a-8040-70949fd961c6"/>
+				<text><![CDATA[FECHA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="50" y="3" width="50" height="15" uuid="7cb1d2bc-c089-441f-bb9f-80d1abe36256"/>
+				<text><![CDATA[HORA]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="35">
+			<textField>
+				<reportElement x="0" y="5" width="50" height="30" uuid="4367ae61-e1ed-4eae-8b8b-f8061b32c2c4"/>
+				<textFieldExpression><![CDATA[$F{ORDER_DATE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="50" y="5" width="50" height="30" uuid="41b7d196-9570-4193-a6e6-0dc6df5ba3ed"/>
+				<textFieldExpression><![CDATA[$F{ORDER_TIME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="115" y="5" width="55" height="30" uuid="77c5422f-0ea0-4aee-9dab-34ceca8d6a0e"/>
+				<textFieldExpression><![CDATA[$F{ORDER_TOTAL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="5" width="55" height="30" uuid="96b2432a-30ae-4563-a0c3-b72258b1929f"/>
+				<textFieldExpression><![CDATA[$F{ORDER_COST}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="225" y="5" width="55" height="30" uuid="37298d68-a552-492d-bc88-6f595d885c58"/>
+				<textFieldExpression><![CDATA[$F{ORDER_PROFIT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="5" width="55" height="30" uuid="006a6737-32c0-4260-b2c1-6549d9f39aa8"/>
+				<textFieldExpression><![CDATA[$F{ORDER_DESCR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="5" width="55" height="30" uuid="e927d84f-7cd5-4ed9-8aac-aca8863a5139"/>
+				<textFieldExpression><![CDATA[$F{ISSUER_NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="445" y="5" width="55" height="30" uuid="d094952f-4583-449c-9940-ac6857c414a8"/>
+				<textFieldExpression><![CDATA[$F{USER_USERNAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="500" y="5" width="55" height="30" uuid="58adc574-6bf4-4868-9ca7-6ef9c65efc3b"/>
+				<textFieldExpression><![CDATA[$F{CUSTOMER_FULLNAME}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="177"/>
+	</lastPageFooter>
+</jasperReport>

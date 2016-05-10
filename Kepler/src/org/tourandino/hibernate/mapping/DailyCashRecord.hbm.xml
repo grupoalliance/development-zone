@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 4, 2015 1:38:43 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.tourandino.model.DailyCashRecord" table="DAILY_CASH_RECORDS" catalog="KEPLER_PROD">
+        <id name="dailyCashRecordId" type="java.lang.Integer">
+            <column name="DAILY_CASH_RECORD_ID" />
+            <generator class="identity"></generator>
+        </id>
+        <property name="openDatetime" type="timestamp">
+            <column name="OPEN_DATETIME" length="19" not-null="true" />
+        </property>
+        <property name="closeDatetime" type="timestamp">
+            <column name="CLOSE_DATETIME" length="19" />
+        </property>
+        <property name="incomeTotal" type="float">
+            <column name="INCOME_TOTAL" precision="10" not-null="true" />
+        </property>
+        <property name="outcomeTotal" type="float">
+            <column name="OUTCOME_TOTAL" precision="10" not-null="true" />
+        </property>
+        <property name="balance" type="float">
+            <column name="BALANCE" precision="10" not-null="true" />
+        </property>
+        <property name="isClosed" type="boolean">
+            <column name="IS_CLOSED" not-null="true" />
+        </property>
+        <property name="dailyCashRecordDate" type="date">
+            <column name="DAILY_CASH_RECORD_DATE" length="10" not-null="true" />
+        </property>
+        <set name="cashMovements" table="CASH_MOVEMENTS" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="DAILY_CASH_RECORD_ID" not-null="true" />
+            </key>
+            <one-to-many class="org.tourandino.model.CashMovement" />
+        </set>
+    </class>
+</hibernate-mapping>

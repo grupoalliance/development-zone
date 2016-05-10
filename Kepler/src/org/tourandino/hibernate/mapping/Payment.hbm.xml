@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 4, 2015 1:38:43 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.tourandino.model.Payment" table="PAYMENTS" catalog="KEPLER_PROD">
+        <id name="paymentId" type="java.lang.Integer">
+            <column name="PAYMENT_ID" />
+            <generator class="identity"></generator>
+        </id>
+        <many-to-one name="order" class="org.tourandino.model.Order" fetch="join">
+            <column name="ORDER_ID" not-null="true" />
+        </many-to-one>
+        <many-to-one name="paymentMethod" class="org.tourandino.model.PaymentMethod" fetch="join">
+            <column name="PAYMENT_METHOD_ID" not-null="true" />
+        </many-to-one>
+        <property name="paymentDatetime" type="timestamp">
+            <column name="PAYMENT_DATETIME" length="19" not-null="true" />
+        </property>
+        <property name="paymentTax" type="float">
+            <column name="PAYMENT_TAX" precision="10" not-null="true" />
+        </property>
+        <property name="paymentRate" type="float">
+            <column name="PAYMENT_RATE" precision="10" not-null="true" />
+        </property>
+        <property name="paymentTotal" type="float">
+            <column name="PAYMENT_TOTAL" precision="10" not-null="true" />
+        </property>
+        <property name="paymentNote" type="string">
+            <column name="PAYMENT_NOTE" length="250" />
+        </property>
+    </class>
+</hibernate-mapping>

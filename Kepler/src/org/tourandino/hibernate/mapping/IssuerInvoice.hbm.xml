@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 4, 2015 1:38:43 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.tourandino.model.IssuerInvoice" table="ISSUER_INVOICES" catalog="KEPLER_PROD">
+        <id name="issuerInvoiceId" type="java.lang.Integer">
+            <column name="ISSUER_INVOICE_ID" />
+            <generator class="identity"></generator>
+        </id>
+        <many-to-one name="order" class="org.tourandino.model.Order" fetch="join">
+            <column name="ORDER_ID" not-null="true" />
+        </many-to-one>
+        <property name="issuerInvoiceNumber" type="string">
+            <column name="ISSUER_INVOICE_NUMBER" length="50" not-null="true" />
+        </property>
+        <property name="issuerInvoiceDate" type="date">
+            <column name="ISSUER_INVOICE_DATE" length="10" not-null="true" />
+        </property>
+        <property name="issuerInvoiceTax" type="float">
+            <column name="ISSUER_INVOICE_TAX" precision="10" not-null="true" />
+        </property>
+        <property name="issuerInvoiceRate" type="float">
+            <column name="ISSUER_INVOICE_RATE" precision="10" not-null="true" />
+        </property>
+        <property name="issuerInvoiceTotal" type="float">
+            <column name="ISSUER_INVOICE_TOTAL" precision="10" not-null="true" />
+        </property>
+        <property name="issuerInvoiceStatus" type="string">
+            <column name="ISSUER_INVOICE_STATUS" length="100" />
+        </property>
+    </class>
+</hibernate-mapping>

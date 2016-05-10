@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 4, 2015 1:38:43 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.tourandino.model.CashMovement" table="CASH_MOVEMENTS" catalog="KEPLER_PROD">
+        <id name="cashMovementId" type="java.lang.Integer">
+            <column name="CASH_MOVEMENT_ID" />
+            <generator class="identity"></generator>
+        </id>
+        <many-to-one name="dailyCashRecord" class="org.tourandino.model.DailyCashRecord" fetch="join">
+            <column name="DAILY_CASH_RECORD_ID" not-null="true" />
+        </many-to-one>
+        <property name="cashMovementDate" type="date">
+            <column name="CASH_MOVEMENT_DATE" length="10" not-null="true" />
+        </property>
+        <property name="cashMovementTime" type="timestamp">
+            <column name="CASH_MOVEMENT_TIME" length="19" not-null="true" />
+        </property>
+        <property name="cashMovementIncome" type="float">
+            <column name="CASH_MOVEMENT_INCOME" precision="10" not-null="true" />
+        </property>
+        <property name="cashMovementOutcome" type="float">
+            <column name="CASH_MOVEMENT_OUTCOME" precision="10" not-null="true" />
+        </property>
+        <property name="cashMovementDescr" type="string">
+            <column name="CASH_MOVEMENT_DESCR" length="250" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 4, 2015 1:38:43 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.tourandino.model.FlightPassenger" table="FLIGHT_PASSENGERS" catalog="KEPLER_PROD">
+        <id name="flightPassengerId" type="java.lang.Integer">
+            <column name="FLIGHT_PASSENGER_ID" />
+            <generator class="identity"></generator>
+        </id>
+        <many-to-one name="passenger" class="org.tourandino.model.Passenger" fetch="join">
+            <column name="PASSENGER_ID" not-null="true" />
+        </many-to-one>
+        <many-to-one name="order" class="org.tourandino.model.Order" fetch="join">
+            <column name="ORDER_ID" not-null="true" />
+        </many-to-one>
+        <property name="flightName" type="string">
+            <column name="FLIGHT_NAME" length="100" />
+        </property>
+        <property name="flightPrice" type="float">
+            <column name="FLIGHT_PRICE" precision="10" not-null="true" />
+        </property>
+        <property name="flightCost" type="float">
+            <column name="FLIGHT_COST" precision="10" not-null="true" />
+        </property>
+        <property name="itinerary" type="string">
+            <column name="ITINERARY" length="250" />
+        </property>
+    </class>
+</hibernate-mapping>

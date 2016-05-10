@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 4, 2015 1:38:43 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.tourandino.model.Role" table="ROLES" catalog="KEPLER_PROD">
+        <id name="roleId" type="java.lang.Integer">
+            <column name="ROLE_ID" />
+            <generator class="identity"></generator>
+        </id>
+        <property name="roleName" type="string">
+            <column name="ROLE_NAME" length="20" not-null="true" />
+        </property>
+        <property name="roleDescr" type="string">
+            <column name="ROLE_DESCR" length="100" />
+        </property>
+        <set name="users" table="USERS" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ROLE_ID" not-null="true" />
+            </key>
+            <one-to-many class="org.tourandino.model.User" />
+        </set>
+    </class>
+</hibernate-mapping>
