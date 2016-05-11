@@ -10,7 +10,7 @@ public class MySQLConnector {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/KEPLER_TEST",
-                    "root", "argentina");
+                    "root", "");
             return con;
         } catch (SQLException ex) {
             System.out.println("Database.getConnection() Error -->" + ex.getMessage());
